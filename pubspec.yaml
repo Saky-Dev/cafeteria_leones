@@ -56,6 +56,32 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: fonts/work_sans/regular.ttf
+        - asset: fonts/work_sans/black.ttf
+          weight: 900
+        - asset: fonts/work_sans/bold.ttf
+          weight: 700
+        - asset: fonts/work_sans/light.ttf
+          weight: 300
+        - asset: fonts/work_sans/extralight.ttf
+          weight: 200
+    - family: SourceSansPro
+      fonts:
+        - asset: fonts/source_sans_pro/regular.ttf
+        - asset: fonts/source_sans_pro/black.ttf
+          weight: 900
+        - asset: fonts/source_sans_pro/bold.ttf
+          weight: 700
+        - asset: fonts/source_sans_pro/light.ttf
+          weight: 300
+        - asset: fonts/source_sans_pro/extralight.ttf
+          weight: 200
+  assets:
+    - assets/images/
+    - assets/icons/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
