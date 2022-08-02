@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  intro_slider: 3.0.9
+  sqflite:
 
 
   # The following adds the Cupertino Icons font to your application.
