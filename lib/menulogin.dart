@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cafeteria_leones/consumerlogin.dart';
 import 'package:cafeteria_leones/sellerlogin.dart';
+import 'dart:math';
 
 class MenuLogin extends StatelessWidget {
   const MenuLogin({Key? key}) : super(key: key);
@@ -29,7 +30,15 @@ class _MenuLoginInterface extends State<MenuLoginInterface> {
   }
 
   void toSellerLogin() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const SellerLogin()));
+    String code = '';
+    int aux = 0;
+
+    for(int i = 0; i < 6; i++) {
+      aux = Random().nextInt(10);
+      code += aux.toString();
+    }
+
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SellerLogin(access_code: code)));
   }
 
   @override

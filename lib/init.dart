@@ -69,7 +69,6 @@ class _SliderState extends State<Slider> {
       showPrevBtn: false,
       showNextBtn: false,
       showDoneBtn: true,
-      autoScroll: true,
       autoScrollInterval: const Duration(seconds: 3),
       doneButtonStyle: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(117, 72, 146, 1))
