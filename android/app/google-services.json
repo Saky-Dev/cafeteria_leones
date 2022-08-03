@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "929170441855",
+    "project_id": "cafeteria-leones",
+    "storage_bucket": "cafeteria-leones.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929170441855:android:8b904e3097434f04de214a",
+        "android_client_info": {
+          "package_name": "com.isaacgh.cafeteria_leones"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929170441855-ih7shr6in4ebfhatnhapbb2tjdvk8iii.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAFe_kg5njIXWQLxGNz0QrQ9WY6M7xu5A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929170441855-ih7shr6in4ebfhatnhapbb2tjdvk8iii.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
