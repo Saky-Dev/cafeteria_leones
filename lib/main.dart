@@ -1,18 +1,61 @@
+import 'package:cafeteria_leones/home.dart';
 import 'package:flutter/material.dart';
 import 'package:cafeteria_leones/init.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'dart:convert';
 
+Future<File> get _localFile async {
+  final directory = await getApplicationDocumentsDirectory();
+  final path = directory.path;
+  return File('$path/config.json');
+}
+
+Future<File> writeConfig(String config) async {
+  final file = await _localFile;
+  return file.writeAsString(config);
+}
+
+Future<String> readConfig() async {
+  try {
+    final file = await _localFile;
+    final String config = await file.readAsString();
+
+    return config;
+  } catch (e) {
+    return 'err';
+  }
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final file = await _localFile;
+  final config = {
+    'logged': false,
+    'products': []
+  };
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const Init());
+
+  if (file.existsSync() == false) {
+    final write = await writeConfig(jsonEncode(config));
+    runApp(const Init());
+
+  } else {
+    final config_json = await readConfig();
+
+    if(config_json != 'err') {
+      final pre_config = jsonDecode(config_json);
+      runApp(pre_config['logged'] == true ? const Home() : const Init());
+    }
+  }
 }
 
-class MyApp extends StatelessWidget {
+/*class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -35,13 +78,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  /*int _counter = 0;
+  int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
-  }*/
+  }
 
   void _seeBasket() {
 
@@ -70,4 +113,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
+}*/

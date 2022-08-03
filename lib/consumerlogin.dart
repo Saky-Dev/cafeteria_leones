@@ -1,6 +1,10 @@
+import 'package:cafeteria_leones/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class ConsumerLogin extends StatelessWidget {
   const ConsumerLogin({Key? key}) : super(key: key);
@@ -27,17 +31,41 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
   final name_ctrl = TextEditingController();
   final school_id_ctrl = TextEditingController();
 
+  Future<File> get _localFile async {
+    final directory = await getApplicationDocumentsDirectory();
+    final path = directory.path;
+    return File('$path/config.json');
+  }
+
+  Future<File> writeConfig(String config) async {
+    final file = await _localFile;
+    return file.writeAsString(config);
+  }
+
+  Future<String> readConfig() async {
+    try {
+      final file = await _localFile;
+      final String config = await file.readAsString();
+
+      return config;
+    } catch (e) {
+      return 'err';
+    }
+  }
+
   Future<void> registerStudent() async {
     bool exist = false;
     String name = name_ctrl.text;
     String school_id = school_id_ctrl.text;
+    final String config_json = await readConfig();
+    Map<String, dynamic> pre_config = jsonDecode(config_json);
 
     if (name != '' && school_id != '') {
       try {
         var doc = await FirebaseFirestore.instance
-            .collection('Consumer')
-            .doc(school_id)
-            .get();
+          .collection('Consumer')
+          .doc(school_id)
+          .get();
 
         exist = doc.exists;
       } catch (e) {
@@ -53,7 +81,12 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
               'name': name,
               'delivery_place': ''
             });
+
+          pre_config['logged'] = true;
+          writeConfig(jsonEncode(pre_config));
+
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Se ha iniciado sesión')));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
         } catch (e) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al iniciar sesión')));
           rethrow;
