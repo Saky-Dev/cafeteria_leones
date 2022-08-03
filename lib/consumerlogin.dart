@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ConsumerLogin extends StatelessWidget {
@@ -29,7 +30,45 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [],
+            children: [
+              const Text(
+                'Inicia Sesión',
+                style: TextStyle(fontSize: 24),
+              ),
+              const SizedBox(height: 120),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 1.2,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Nombre',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 1.2,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    labelText: 'Matricula',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 70),
+              CupertinoButton(
+                borderRadius: BorderRadius.circular(50),
+                color: const Color.fromRGBO(164, 111, 201, 1),
+                onPressed: () {  },
+                child: const Text('Entrar'),
+              )
+            ],
           ),
         )
     );
