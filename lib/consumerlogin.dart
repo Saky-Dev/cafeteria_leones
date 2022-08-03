@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConsumerLogin extends StatelessWidget {
   const ConsumerLogin({Key? key}) : super(key: key);
@@ -23,6 +24,48 @@ class ConsumerLoginInterface extends StatefulWidget {
 }
 
 class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
+  final name_ctrl = TextEditingController();
+  final school_id_ctrl = TextEditingController();
+
+  Future<void> registerStudent() async {
+    bool exist = false;
+    String name = name_ctrl.text;
+    String school_id = school_id_ctrl.text;
+
+    if (name != '' && school_id != '') {
+      try {
+        var doc = await FirebaseFirestore.instance
+            .collection('Consumer')
+            .doc(school_id)
+            .get();
+
+        exist = doc.exists;
+      } catch (e) {
+        rethrow;
+      }
+
+      if (exist == false) {
+        try {
+          await FirebaseFirestore.instance
+            .collection('Consumer')
+            .doc(school_id)
+            .set({
+              'name': name,
+              'delivery_place': ''
+            });
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Se ha iniciado sesión')));
+        } catch (e) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al iniciar sesión')));
+          rethrow;
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('El usuario ya existe')));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Completa los campos necesarios')));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +82,7 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 1.2,
                 child: TextFormField(
+                  controller: name_ctrl,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Nombre',
@@ -52,6 +96,7 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 1.2,
                 child: TextFormField(
+                  controller: school_id_ctrl,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Matricula',
@@ -65,7 +110,7 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
               CupertinoButton(
                 borderRadius: BorderRadius.circular(50),
                 color: const Color.fromRGBO(164, 111, 201, 1),
-                onPressed: () {  },
+                onPressed: registerStudent,
                 child: const Text('Entrar'),
               )
             ],
