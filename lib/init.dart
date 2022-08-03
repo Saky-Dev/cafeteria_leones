@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
+import 'package:cafeteria_leones/menulogin.dart';
 
 class Init extends StatelessWidget {
   const Init({Key? key}) : super(key: key);
@@ -35,8 +36,8 @@ class _SliderState extends State<Slider> {
         pathImage: 'assets/images/meet.jpg',
         description: '¡Descansa mientas esperas!',
         styleDescription: const TextStyle(
-            color: Colors.black,
-            fontSize: 28
+          color: Colors.black,
+          fontSize: 28
         ),
         backgroundColor: Colors.white,
       ),
@@ -56,7 +57,7 @@ class _SliderState extends State<Slider> {
   }
 
   void onDonePress() {
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuLogin()));
   }
 
   @override
