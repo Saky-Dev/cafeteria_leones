@@ -1,3 +1,4 @@
+import 'package:cafeteria_leones/adminpanel.dart';
 import 'package:cafeteria_leones/home.dart';
 import 'package:flutter/material.dart';
 import 'package:cafeteria_leones/init.dart';
@@ -34,6 +35,7 @@ Future<void> main() async {
   final file = await _localFile;
   final config = {
     'logged': false,
+    'type': '',
     'products': []
   };
 
@@ -50,7 +52,7 @@ Future<void> main() async {
 
     if(config_json != 'err') {
       final pre_config = jsonDecode(config_json);
-      runApp(pre_config['logged'] == true ? const Home() : const Init());
+      runApp(pre_config['logged'] == true ? (pre_config['type'] == 'consumer' ? const Home() : const AdminPanel()) : const Init());
     }
   }
 }
