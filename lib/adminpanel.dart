@@ -1,4 +1,5 @@
-import 'package:cafeteria_leones/backdata.dart';
+import 'package:cafeteria_leones/addsaucer.dart';
+import 'package:cafeteria_leones/bankdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mac_address/mac_address.dart';
@@ -72,6 +73,10 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
 
   void toBankData() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const BankData()));
+  }
+
+  void toAddSaucer() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSaucer()));
   }
 
   @override
@@ -173,7 +178,7 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
                   childAspectRatio: ((MediaQuery.of(context).size.width / 3) / (MediaQuery.of(context).size.height / 15)),
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: toAddSaucer,
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         padding: const EdgeInsets.symmetric(vertical: 15),
