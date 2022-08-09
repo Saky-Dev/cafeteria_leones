@@ -1,3 +1,4 @@
+import 'package:cafeteria_leones/backdata.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mac_address/mac_address.dart';
@@ -67,6 +68,10 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
       }).catchError((error) => {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al actualizar')))
       });
+  }
+
+  void toBankData() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const BankData()));
   }
 
   @override
@@ -213,7 +218,7 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: toBankData,
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           padding: const EdgeInsets.symmetric(vertical: 15),
