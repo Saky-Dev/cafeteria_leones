@@ -1,5 +1,6 @@
 import 'package:cafeteria_leones/addsaucer.dart';
 import 'package:cafeteria_leones/bankdata.dart';
+import 'package:cafeteria_leones/searchsaucer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mac_address/mac_address.dart';
@@ -77,6 +78,10 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
 
   void toAddSaucer() {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSaucer()));
+  }
+
+  void toSaucers() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchSaucer()));
   }
 
   @override
@@ -193,7 +198,7 @@ class _AdminPanelInterface extends State<AdminPanelInterface> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: toSaucers,
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           padding: const EdgeInsets.symmetric(vertical: 15),
