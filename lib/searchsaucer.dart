@@ -1,3 +1,4 @@
+import 'package:cafeteria_leones/editsaucer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mac_address/mac_address.dart';
@@ -135,7 +136,9 @@ class _SearchSaucerInterface extends State<SearchSaucerInterface> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditSaucer(title: saucers[index]['name'])));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white,
                                   padding: const EdgeInsets.symmetric(horizontal: 10),
