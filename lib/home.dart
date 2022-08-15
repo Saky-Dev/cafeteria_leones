@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cafeteria_leones/basket.dart';
 import 'package:cafeteria_leones/consumerinformation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -34,7 +35,7 @@ class _HomeInterface extends State<HomeInterface> {
   List all_saucers = <Map<String, dynamic>>[];
 
   void seeBasket() {
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const Basket()));
   }
 
   Future<File> get _localFile async {
@@ -78,7 +79,7 @@ class _HomeInterface extends State<HomeInterface> {
 
     try {
       for (int i = 0; i < pre_config['products'].length; i++) {
-        if (saucers[index]['name'] == pre_config['products'][i]) {
+        if (saucers[index]['name'] == pre_config['products'][i]['name']) {
           exist = true;
           pre_config['products'][i]['count'] += 1;
           break;
@@ -211,7 +212,9 @@ class _HomeInterface extends State<HomeInterface> {
                   fontSize: 18
                 ),
               ),
-              onTap: () { },
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const Basket()));
+              },
             ),
             ListTile(
               title: const Text(

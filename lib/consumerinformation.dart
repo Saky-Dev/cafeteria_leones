@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cafeteria_leones/basket.dart';
 import 'package:cafeteria_leones/home.dart';
 import 'package:cafeteria_leones/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,7 +60,7 @@ class _ConsumerInformationInterface extends State<ConsumerInformationInterface> 
   }
 
   void seeBasket() {
-
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const Basket()));
   }
 
   Future<void> getUserData() async {
@@ -78,7 +79,7 @@ class _ConsumerInformationInterface extends State<ConsumerInformationInterface> 
 
     delivery_place_ctrl.text = doc.get('delivery_place');
     card_num_ctrl.text = pre_config['card_num'];
-    exp_date_ctrl.text = pre_config['exp_Date'];
+    exp_date_ctrl.text = pre_config['exp_date'];
     cvv_ctrl.text = pre_config['cvv'];
   }
 
@@ -227,7 +228,9 @@ class _ConsumerInformationInterface extends State<ConsumerInformationInterface> 
                       fontSize: 18
                   ),
                 ),
-                onTap: () { },
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Basket()));
+                },
               ),
               ListTile(
                 title: const Text(
