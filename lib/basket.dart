@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cafeteria_leones/consumerinformation.dart';
 import 'package:cafeteria_leones/home.dart';
+import 'package:cafeteria_leones/paymentinfo.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -349,7 +350,9 @@ class _BasketInterface extends State<BasketInterface> {
                     const SizedBox(width: 10,),
                     Expanded(
                       child: ElevatedButton(
-                          onPressed: () { },
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const PaymentInfo()));
+                          },
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
