@@ -42,6 +42,11 @@ class _ConsumerInformationInterface extends State<ConsumerInformationInterface> 
     return File('$path/config.json');
   }
 
+  Future<File> writeConfig(String config) async {
+    final file = await _localFile;
+    return file.writeAsString(config);
+  }
+
   Future<String> readConfig() async {
     try {
       final file = await _localFile;
