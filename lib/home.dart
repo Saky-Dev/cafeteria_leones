@@ -114,12 +114,14 @@ class _HomeInterface extends State<HomeInterface> {
               saucers.add({
                 'name': element.id,
                 'price': element.get('price'),
+                'availability': element.get('availability'),
                 'image': url
               });
 
               all_saucers.add({
                 'name': element.id,
                 'price': element.get('price'),
+                'availability': element.get('availability'),
                 'image': url
               });
             });
@@ -289,75 +291,88 @@ class _HomeInterface extends State<HomeInterface> {
                         ),
                         delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(saucers[index]['image']),
-                                    fit: BoxFit.cover,
+                              if (saucers[index]['availability'] == true) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            saucers[index]['image']),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10)
                                   ),
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(15),
-                                            color: const Color.fromRGBO(118, 71, 151, 1),
-                                          ),
-                                          child: Text(
-                                            '\$${saucers[index]['price']}',
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 16
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceBetween,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 10),
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius
+                                                  .circular(15),
+                                              color: const Color.fromRGBO(
+                                                  118, 71, 151, 1),
+                                            ),
+                                            child: Text(
+                                              '\$${saucers[index]['price']}',
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            addToBasket(index);
-                                          },
-                                          style: ElevatedButton.styleFrom(
-                                              shape: const CircleBorder(),
-                                              padding: const EdgeInsets.all(3),
-                                              primary: const Color.fromRGBO(118, 71, 151, 1)
-                                          ),
-                                          child: const Icon(
-                                            Icons.add,
-                                            color: Colors.white,
-                                            size: 15.0,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                            child: Container(
-                                              padding: const EdgeInsets.symmetric(vertical: 10),
-                                              decoration: BoxDecoration(
-                                                color: const Color.fromRGBO(0, 0, 0, 0.6),
-                                                borderRadius: BorderRadius.circular(10)
-                                              ),
-                                              child: Text(
-                                                '${saucers[index]['name']}',
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 18
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              addToBasket(index);
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                                shape: const CircleBorder(),
+                                                padding: const EdgeInsets.all(
+                                                    3),
+                                                primary: const Color.fromRGBO(
+                                                    118, 71, 151, 1)
+                                            ),
+                                            child: const Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 15.0,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Container(
+                                                padding: const EdgeInsets
+                                                    .symmetric(vertical: 10),
+                                                decoration: BoxDecoration(
+                                                    color: const Color.fromRGBO(
+                                                        0, 0, 0, 0.6),
+                                                    borderRadius: BorderRadius
+                                                        .circular(10)
                                                 ),
-                                              ),
-                                            )
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              );
+                                                child: Text(
+                                                  '${saucers[index]['name']}',
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 18
+                                                  ),
+                                                ),
+                                              )
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
                             },
                           childCount: saucers.length
                         )
