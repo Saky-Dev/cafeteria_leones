@@ -40,7 +40,7 @@ Future<void> main() async {
     'card_num': '',
     'exp_date': '',
     'cvv': '',
-    'products': []
+    'products': {}
   };
 
   await Firebase.initializeApp(

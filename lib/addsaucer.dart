@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddSaucer extends StatelessWidget {
   const AddSaucer({Key? key}) : super(key: key);
@@ -24,6 +28,7 @@ class AddSaucerInterface extends StatefulWidget {
 
 class _AddSaucerInterface extends State<AddSaucerInterface> {
   String dropDownValue = 'Platillo';
+  File saucer_picture = new File('');
   final name_ctrl = TextEditingController();
   final description_ctrl = TextEditingController();
   final price_ctrl = TextEditingController();
@@ -47,7 +52,7 @@ class _AddSaucerInterface extends State<AddSaucerInterface> {
     print(description.length);
     print(price.length);
 
-    if (name.length == 0 || description.length == 0 || price.length == 0) {
+    if (name.length == 0 || description.length == 0 || price.length == 0 || saucer_picture.path == '') {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Los campos deben ser correctamente llenados')));
     } else {
 
@@ -71,6 +76,28 @@ class _AddSaucerInterface extends State<AddSaucerInterface> {
         }).catchError((error) => {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al añadir')))
         });
+
+      final storageRef = FirebaseStorage.instance.ref();
+      final saucer = storageRef.child('$name.jpg');
+
+      await saucer.putFile(saucer_picture).then((p0) => {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Imagen subida de forma correcta')))
+      })
+      .catchError((onError) => {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Error al subir la imagen')))
+      });
+    }
+  }
+
+  Future<void> getImage() async {
+    XFile? pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1000,
+      maxHeight: 1000,
+    );
+    if (pickedFile != null) {
+      saucer_picture = File(pickedFile.path);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Foto añadida!')));
     }
   }
 
@@ -97,7 +124,7 @@ class _AddSaucerInterface extends State<AddSaucerInterface> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                    onPressed: () { },
+                    onPressed: getImage,
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
                       padding: const EdgeInsets.all(15),

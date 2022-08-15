@@ -38,6 +38,8 @@ dependencies:
   cloud_firestore: ^3.4.3
   path_provider: ^2.0.11
   mac_address: ^1.0.0
+  image_picker: ^0.8.5+3
+  firebase_storage: ^10.3.5
 
 dev_dependencies:
   flutter_test:
