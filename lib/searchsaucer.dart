@@ -39,14 +39,16 @@ class _SearchSaucerInterface extends State<SearchSaucerInterface> {
         .get()
         .then((collection) => {
           collection.docs.forEach((element) {
-            saucers.add({
-              'name': element.id,
-              'availability': element.get('availability')
-            });
+            setState(() {
+              saucers.add({
+                'name': element.id,
+                'availability': element.get('availability')
+              });
 
-            all_saucers.add({
-              'name': element.id,
-              'availability': element.get('availability')
+              all_saucers.add({
+                'name': element.id,
+                'availability': element.get('availability')
+              });
             });
           }),
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Correcto')))
@@ -75,7 +77,9 @@ class _SearchSaucerInterface extends State<SearchSaucerInterface> {
     saucers.clear();
     all_saucers.forEach((element) {
       if (element['name'].toString().contains(search_ctrl.text) == true) {
-        saucers.add(element);
+        setState(() {
+          saucers.add(element);
+        });
       }
     });
   }

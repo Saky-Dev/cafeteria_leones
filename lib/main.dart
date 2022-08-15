@@ -36,6 +36,10 @@ Future<void> main() async {
   final config = {
     'logged': false,
     'type': '',
+    'id': '',
+    'card_num': '',
+    'exp_date': '',
+    'cvv': '',
     'products': []
   };
 

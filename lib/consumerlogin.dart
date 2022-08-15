@@ -85,6 +85,7 @@ class _ConsumerLoginInterface extends State<ConsumerLoginInterface> {
 
           pre_config['logged'] = true;
           pre_config['type'] = 'consumer';
+          pre_config['id'] = school_id;
           writeConfig(jsonEncode(pre_config));
 
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Se ha iniciado sesión')));

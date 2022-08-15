@@ -1,3 +1,4 @@
+import 'package:cafeteria_leones/consumerinformation.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -106,7 +107,9 @@ class _HomeInterface extends State<HomeInterface> {
                   fontSize: 18
                 ),
               ),
-              onTap: () { },
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ConsumerInformation()));
+              },
             ),
             ListTile(
               title: const Text(
@@ -160,7 +163,8 @@ class _HomeInterface extends State<HomeInterface> {
       floatingActionButton: FloatingActionButton(
         onPressed: seeBasket,
         tooltip: 'ShoppingBasket',
-        child: const Icon(Icons.shopping_basket),
+        child: Icon(Icons.shopping_basket),
+        backgroundColor: const Color.fromRGBO(165, 110, 202, 1),
       )
     );
   }
